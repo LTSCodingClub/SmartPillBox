@@ -1,0 +1,366 @@
+<html>
+<title>Schedule</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container w3-teal">
+  
+<h1>Schedule</h1>
+</div>
+
+
+ <form action="/setSchedule" method="POST">
+     
+       
+        
+    
+    <table>
+        <!-- Monday -->
+        <div>
+            <tr>
+                <th>Monday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="monMorning" name="monMorning" value={{ mondayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="monLunch" name="monLunch" value={{ mondayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="monEvening" name="monEvening" value={{ mondayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="monSpare" name="monSpare" value={{ mondaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            
+    </div>
+    <!-- Tuesday -->
+    <div>
+            <tr>
+                <th>Tuesday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="tueMorning" name="tueMorning" value={{ tuesdayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="tueLunch" name="tueLunch" value={{ tuesdayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="tueEvening" name="tueEvening" value={{ tuesdayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="tueSpare" name="tueSpare" value={{ tuesdaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+    </div>
+    <!--Wednesday -->
+    <div>
+            <tr>
+                <th>Wedneday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="wedMorning" name="wedMorning" value={{ wednesdayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="wedLunch" name="wedLunch" value={{ wednesdayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="wedEvening" name="wedEvening" value={{ wednesdayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="wedSpare" name="wedSpare" value={{ wednesdaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+    </div>
+    <!-- Thursday -->        
+    <div>
+            <tr>
+                <th>Thursday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="thursMorning" name="thursMorning" value={{ thursdayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="thursLunch" name="thursLunch" value={{ thursdayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="thursEvening" name="thursEvening" value={{ thursdayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="thursSpare" name="thursSpare" value={{ thursdaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            
+    </div>
+    <!-- Friday -->
+    <div>
+            <tr>
+                <th>Friday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="friMorning" name="friMorning" value={{ fridayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="friLunch" name="friLunch" value={{ fridayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="friEvening" name="friEvening" value={{ fridayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="friSpare" name="friSpare" value={{ fridaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+   </div>
+   <!-- Saturday -->
+   <div>         
+    
+            <tr>
+                <th>Saturday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="satMorning" name="satMorning" value={{ saturdayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="satLunch" name="satLunch" value={{ saturdayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="satEvening" name="satEvening" value={{ saturdayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="satSpare" name="satSpare" value={{ saturdaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+    </div>    
+    <!-- Sunday -->
+    <div>
+            <tr>
+                <th>Sunday</th>
+                <th>Time</th>
+                <th>Active</th>
+            </tr>
+                
+            <tr>
+                <td>Morning</td>
+                <td>
+                    <input type="time" id="sunMorning" name="sunMorning" value={{ sundayMorning }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunchtime</td>
+                <td>
+                    <input type="time" id="sunLunch" name="sunLunch" value={{ sundayLunch }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Evening</td>
+                <td>
+                    <input type="time" id="sunEvening" name="sunEvening" value={{ sundayEvening }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+            <tr>
+                <td>Spare</td>
+                <td>
+                    <input type="time" id="sunSpare" name="sunSpare" value={{ sundaySpare }}>
+                </td>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            </tr>
+         
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            
+    </div>
+          
+          
+    </table>
+          <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>

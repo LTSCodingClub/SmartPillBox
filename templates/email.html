@@ -1,0 +1,54 @@
+<html>
+<title>Email</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container w3-teal">
+  
+<h1>Email</h1>
+</div>
+
+<div class="w3-container">
+<br>
+<p>This page sets up the email address of a relative or carer of the person taking the pills.</p>
+<p>It will send an email when the prson has taken their pills.</p>
+<p>If the person forgets to take their pills within a certain time, it will send an email to let their relative or carer know.</p>
+<br>
+
+    <!--
+ 
+    patientFirstname=generalInfo[0],patientSurname=generalInfo[1],
+                           carerFirstname=generalInfo[2],carerSurname=generalInfo[3],
+                           carerEmail=generalInfo[4])
+    -->
+    
+
+ <form action="/emailSet" method="POST">
+
+     <label for="pfname">Patient's first name:</label><br>
+     
+     <input type="text" id="pfname" name="pfname" value={{ patientFirstname }}> <br>
+     
+     <label for="plname">Patient's last name:</label><br>
+     
+     <input type="text" id="plname" name="plname" value={{ patientSurname }}><br><br>
+     
+     <label for="cfname">Carer's first name:</label><br>
+     
+     <input type="text" id="cfname" name="cfname" value={{ carerFirstname }}><br>
+     
+     <label for="clname">Carer's last name:</label><br>
+     
+     <input type="text" id="clname" name="clname" value={{ carerSurname }}><br><br>
+
+     <label for="clemail">Carer's email address:</label><br>
+     
+     <input type="email" id="cemail" name="cemail" value={{ carerEmail }}><br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+</div>
+</body>
+</html>
