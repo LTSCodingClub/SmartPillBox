@@ -6,6 +6,259 @@ from datetime import datetime
 import json, os
 import logging
 import threading
+
+from gpiozero import LED, Button
+from time import sleep
+
+# PillBox GPIO
+#
+# +5V 			(Red) 		- 	Pin 4
+# GND 			(Black 		- 	Pin 6
+# Spare GND 	(White)		-	Pin 16 	GPIO 23
+# Sunday +V 	(Brown)		-	Pin 18 	GPIO 24
+# Saturday +V	(Yellow) 	- 	Pin 22 	GPIO 25
+# Evening GND 	(Orange)	-	Pin 24	GPIO 08
+# Friday +V		(Green)		-	Pin 26	GPIO 07
+# Thursday +V	(Blue)		-	Pin 28	GPIO 01
+# Lunch GND		(Purple)	-	Pin 32	GPIO 12
+# Wednesday +V	(Grey)		-	Pin 36	GPIO 16
+# Morning GND	(White)		-	Pin 38	GPIO 20
+# Tuesday +V	(Black)		-	Pin 40	GPIO 21
+# Monday +V		(Brown)		-	Pin 37	GPIO 26
+
+# Button Sig (White)	-	Pin 3	GPIO 2
+# Button GND (Black)	-	Pin 14 GND
+
+# We have a button which the user can press to signify that they have taken their pills
+button = Button(2)
+
+
+# Spare GND 	(White)		-	Pin 16 	GPIO 23
+SpareGND = LED(23)
+# Sunday +V 	(Brown)		-	Pin 18 	GPIO 24
+SundayLED = LED(24)
+# Saturday +V	(Yellow) 	- 	Pin 22 	GPIO 25
+SaturdayLED = LED(25)
+# Evening GND 	(Orange)	-	Pin 24	GPIO 08
+EveningGND = LED(8)
+# Friday +V		(Green)		-	Pin 26	GPIO 07
+FridayLED = LED(7)
+# Thursday +V	(Blue)		-	Pin 28	GPIO 01
+ThursdayLED = LED(1)
+# Lunch GND		(Purple)	-	Pin 32	GPIO 12
+LunchGND = LED(12)
+# Wednesday +V	(Grey)		-	Pin 36	GPIO 16
+WednesdayLED = LED(16)
+# Morning GND	(White)		-	Pin 38	GPIO 20
+MorningGND = LED(20)
+# Tuesday +V	(Black)		-	Pin 40	GPIO 21
+TuesdayLED = LED(21)
+# Monday +V		(Brown)		-	Pin 37	GPIO 26
+MondayLED = LED(26)
+
+
+MondayLED.off()
+TuesdayLED.off()
+WednesdayLED.off()
+ThursdayLED.off()
+FridayLED.off()
+SaturdayLED.off()
+SundayLED.off()
+
+MorningGND.off()
+LunchGND.off()
+EveningGND.off()
+SpareGND.off()
+
+def flash_until_button_pressed_or_time_up(day,time,requiredTime):
+
+    global button,event
+    global SpareGND,SundayLED,SaturdayLED,EveningGND,FridayLED,ThursdayLED,LunchGND,WednesdayLED,MorningGND,TuesdayLED,MondayLED
+    
+    # The idea is to flash the LED for time seconds.
+    # if the button gets pressed then stop flashing and return True (as in the person says that they took their pill
+    # if the button doesn't get pressed within the time left, return False to let the carer know that there may be a problem.
+    pillTaken=False
+    MorningGND.off()
+    LunchGND.off()
+    EveningGND.off()
+    SpareGND.off()
+    
+    # Establish which time zone we want:
+    
+    if time=="Morning":
+        MorningGND.on()
+    
+    if time=="Lunch":
+        LunchGND.on()
+        
+    if time=="Evening":
+        EveningGND.on()
+        
+    if time=="Spare":
+        SpareGND.on()
+    
+    # Establish the day
+
+    # There must be a better way but this should work!
+    
+    if day=="Monday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            MondayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            MondayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+            
+    if day=="Tuesday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            TuesdayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            TuesdayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+    if day=="Wednesday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            WednesdayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            WednesdayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+    if day=="Thursday":
+        
+    
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            ThursdayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            ThursdayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+    if day=="Friday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            FridayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            FridayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+    if day=="Saturday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            SaturdayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            SaturdayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+            
+    if day=="Sunday":
+        
+        flashTime=0
+    
+        while flashTime<=requiredTime:
+        
+            #Flash the LED
+            SundayLED.on()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            SundayLED.off()
+            # wait for 1 second or more
+            button.wait_for_press(1)
+            if button.is_pressed:
+                print("Button is pressed - so send email to say all fine")
+                pillTaken=True
+                flashTime=requiredTime+2
+                
+            flashTime=flashTime+2
+            
+        
+    MorningGND.off()
+    LunchGND.off()
+    EveningGND.off()
+    SpareGND.off()
+    
+    
+    SpareGND.off()
+    SaturdayLED.off()
+    return pillTaken
+
+
+
+
 ## Set up fake times
 morningList = ['10:00','10:00','10:00','10:00','10:00','10:00','10:00']
 lunchList = ["13:00","13:00","13:00","13:00","13:00","13:00","13:00"]
@@ -69,7 +322,8 @@ def load_schedule():
        # print("No changes to the schedule")
 
 
-def sendmail(sender_email, sender_password, receiver_email, subject, message):
+def send_mail(sender_email, sender_password, receiver_email, subject, message):
+    print("send_mail - called")
     # Set up the SMTP server
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
@@ -98,7 +352,8 @@ def sendmail(sender_email, sender_password, receiver_email, subject, message):
 
 
 
-def informCarer(day, time, taken):
+def inform_carer(day, time, taken):
+    
 
     global generalInfo
     
@@ -115,9 +370,9 @@ def informCarer(day, time, taken):
 
     # The following could be editable and stored in the general info .json file:
     
-    sender_email = "####Enter your address####"  
+    sender_email = "****email****"  
     receiver_email = generalInfo[4]
-    sender_password = "####Enter your password####"
+    sender_password = "***Password****"
     
    
     # Now send an email...
@@ -135,7 +390,7 @@ def informCarer(day, time, taken):
         subject = "Good news from the smart pill box"
 
         message = "Dear "+carerFirstname+",<br><br>This is just to let you know that "+patientFirstname+" has taken their pill(s) at "+time
-        message = message+"<br><br>The smart pill box"
+        message = message+"<br><br>Kindest regards<br><br>The smart pill box"
     else:
         
         subject = "Warning from the smart pill box"
@@ -144,11 +399,12 @@ def informCarer(day, time, taken):
         message = message+"<br>you may wish to investigate<br><br>"
         message = message+"<br><br>The smart pill box"
         
-    sendmail(sender_email, sender_password, receiver_email, subject, message)
+    print(message)
+    send_mail(sender_email, sender_password, receiver_email, subject, message)
 
 
 
-def medicationTime():
+def medication_time():
 
     global morningList
     global lunchList
@@ -187,14 +443,34 @@ def medicationTime():
     spareHour=int(spareString[0:2])
     spareMinute=int(spareString[3:5])
     
+    # Three chances to take the pill
+    global numberOfTimesNotTaken
+    
     #print(lunchHour,":",lunchMinute)
-    # Compare the curret time to see if it falls within a pill reminder boundary
+    # Compare the current time to see if it falls within a pill reminder boundary
     if testTime.hour==morningHour:
         
         if testTime.minute == morningMinute:
             
             # It is time to take a pill from today's morning compartment
             print("It is time to take a pill from today's morning compartment")
+            if flash_until_button_pressed_or_time_up(testDay,"Morning",20):
+                print("Pill taken")
+                if sentEmail==False:
+                    
+                    inform_carer(str(testDay), str(morningHour)+":"+str(morningMinute), True)
+                    sentEmail=True
+                sleep(60)
+            else:
+                print("Pill not taken!")
+                print(numberOfTimesNotTaken)
+                if numberOfTimesNotTaken >=3:
+                    # Three chances to take the pill
+                    numberOfTimesNotTaken = 0
+                    if sentEmail==False:
+                        
+                        inform_carer(str(testDay), str(morningHour)+":"+str(morningMinute), False)
+                        sentEmail=True
     
     if testTime.hour==lunchHour:
         
@@ -202,6 +478,25 @@ def medicationTime():
             
             # It is time to take a pill from today's lunch compartment
             print("It is time to take a pill from today's lunch compartment")
+            if flash_until_button_pressed_or_time_up(testDay,"Lunch",20):
+                print("Pill taken")
+                if sentEmail==False:
+                    
+                    inform_carer(str(testDay), str(lunchHour)+":"+str(lunchMinute), True)
+                    sentEmail=True
+                sleep(60)
+            else:
+                print("Pill not taken!")
+                numberOfTimesNotTaken =numberOfTimesNotTaken +1
+                print(numberOfTimesNotTaken)
+                if numberOfTimesNotTaken >=3:
+                    # Three chances to take the pill
+                    numberOfTimesNotTaken = 0
+                    if sentEmail==False:
+                        
+                        inform_carer(str(testDay), str(lunchHour)+":"+str(lunchMinute), False)
+                        sentEmail=True
+                        
             
     if testTime.hour==eveningHour:
         
@@ -209,38 +504,64 @@ def medicationTime():
             
             # It is time to take a pill from today's evening compartment
             print("It is time to take a pill from today's evening compartment")
-            
+            if flash_until_button_pressed_or_time_up(testDay,"Evening",20):
+                print("Pill taken")
+                if sentEmail==False:
+                    
+                    inform_carer(str(testDay), str(eveningHour)+":"+str(eveningMinute), True)
+                    sentEmail=True
+                sleep(60)
+            else:
+                print("Pill not taken!")
+                numberOfTimesNotTaken =numberOfTimesNotTaken +1
+                print(numberOfTimesNotTaken)
+                if numberOfTimesNotTaken >=3:
+                    # Three chances to take the pill
+                    numberOfTimesNotTaken = 0
+                    if sentEmail==False:
+                        
+                        inform_carer(str(testDay), str(eveningHour)+":"+str(eveningMinute), False)
+                        sentEmail=True
+                        
+                        
     if testTime.hour==spareHour:
         
         if testTime.minute == spareMinute:
             
             # It is time to take a pill from today's spare compartment
             print("It is time to take a pill from today's spare compartment")
-
-    if debugging:
-        # Test debugging code - set to a close time for testing - remove or disable for production version
-        if testTime.hour==17:
-            
-           # print("Correct Hour")
-            if testTime.minute == 28:
-                
-                # It is time to take a pill from today's spare compartment
-                print("It is time to take a pill from today's debugging compartment")
+            if flash_until_button_pressed_or_time_up(testDay,"Spare",20):
+                print("Pill taken")
+                sleep(60)
                 if sentEmail==False:
                     
-                    informCarer("Saturday", "17:20", True)
+                    inform_carer(str(testDay), str(spareHour)+":"+str(spareMinute), True)
                     sentEmail=True
-        
-# Main program
+            else:
+                print("Pill not taken!")
 
-# Set a flag for debugging and development - don't forget to switch to flase!
-debugging=True
+                numberOfTimesNotTaken =numberOfTimesNotTaken +1
+                
+
+                if numberOfTimesNotTaken >=3:
+                    
+                    if sentEmail==False:
+                        # Three chances to take the pill
+                        numberOfTimesNotTaken = 0
+                        inform_carer(str(testDay), str(spareHour)+":"+str(spareMinute), False)
+                        sentEmail=True
+                    
+# Main program
+# Three chances to take the pill
+numberOfTimesNotTaken = 0
+    
 sentEmail=False
 
 # Set up a base date for the file comparison - to avoid loaduing the same files unnecessarily.
 last_modified_time=datetime(2024, 3, 7)
 
 event = threading.Event()
+
 
 while True:
 
@@ -249,14 +570,6 @@ while True:
     load_schedule()
 
     # Now we need to check if is time for a pill... 
-    medicationTime()
+    medication_time()
     # wait for 1 second or more
     event.wait(1)
-    
-    
-
-    
-            
-
-
-
