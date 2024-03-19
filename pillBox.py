@@ -6,6 +6,7 @@ from datetime import datetime
 import json, os
 import logging
 import threading
+import pygame # For Audio
 
 from gpiozero import LED, Button
 from time import sleep
@@ -69,6 +70,24 @@ MorningGND.off()
 LunchGND.off()
 EveningGND.off()
 SpareGND.off()
+
+def play_sound_file(file_path):
+    pygame.init()
+    pygame.mixer.init()
+
+    try:
+        pygame.mixer.music.load(file_path)
+        pygame.mixer.music.play()
+
+        # Allow time for the sound to play
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
+
+    except Exception as e:
+        print(f"Error playing the sound: {e}")
+
+    pygame.mixer.quit()
+    pygame.quit()
 
 def flash_until_button_pressed_or_time_up(day,time,requiredTime):
 
@@ -370,9 +389,9 @@ def inform_carer(day, time, taken):
 
     # The following could be editable and stored in the general info .json file:
     
-    sender_email = "****email****"  
+    sender_email = "pillbox@lts-interactive.co.uk"  
     receiver_email = generalInfo[4]
-    sender_password = "***Password****"
+    sender_password = "Longridge"
     
    
     # Now send an email...
@@ -454,6 +473,7 @@ def medication_time():
             
             # It is time to take a pill from today's morning compartment
             print("It is time to take a pill from today's morning compartment")
+            play_sound_file(medication_time_sound_file)
             if flash_until_button_pressed_or_time_up(testDay,"Morning",20):
                 print("Pill taken")
                 if sentEmail==False:
@@ -478,6 +498,7 @@ def medication_time():
             
             # It is time to take a pill from today's lunch compartment
             print("It is time to take a pill from today's lunch compartment")
+            play_sound_file(medication_time_sound_file)
             if flash_until_button_pressed_or_time_up(testDay,"Lunch",20):
                 print("Pill taken")
                 if sentEmail==False:
@@ -504,6 +525,7 @@ def medication_time():
             
             # It is time to take a pill from today's evening compartment
             print("It is time to take a pill from today's evening compartment")
+            play_sound_file(medication_time_sound_file)
             if flash_until_button_pressed_or_time_up(testDay,"Evening",20):
                 print("Pill taken")
                 if sentEmail==False:
@@ -530,6 +552,7 @@ def medication_time():
             
             # It is time to take a pill from today's spare compartment
             print("It is time to take a pill from today's spare compartment")
+            play_sound_file(medication_time_sound_file)
             if flash_until_button_pressed_or_time_up(testDay,"Spare",20):
                 print("Pill taken")
                 sleep(60)
@@ -557,11 +580,11 @@ numberOfTimesNotTaken = 0
     
 sentEmail=False
 
-# Set up a base date for the file comparison - to avoid loaduing the same files unnecessarily.
+# Set up a base date for the file comparison - to avoid loading the same files unnecessarily.
 last_modified_time=datetime(2024, 3, 7)
 
 event = threading.Event()
-
+medication_time_sound_file="phoebe.mp3"
 
 while True:
 
@@ -573,3 +596,4 @@ while True:
     medication_time()
     # wait for 1 second or more
     event.wait(1)
+    
